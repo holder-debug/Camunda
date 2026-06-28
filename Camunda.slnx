@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Camunda.App/Camunda.App.csproj" />
+  <Project Path="Camunda.Infra/Camunda.Infra.csproj" />
+</Solution>
