@@ -5,8 +5,8 @@ namespace Camunda.App.Forms;
 
 public partial class CheckInventoryForm : Form
 {
-    private readonly CamundaService _service;
     private readonly string _processInstanceId;
+    private readonly CamundaService _service;
 
     public CheckInventoryForm(CamundaService service, string processInstanceId)
     {
@@ -41,9 +41,9 @@ public partial class CheckInventoryForm : Form
             var jobs = await _service.FetchJobsAsync("check-inventory");
             var job = jobs.FirstOrDefault(j => j.ProcessInstanceId == _processInstanceId)
                       ?? throw new Exception("job یافت نشد");
-            await _service.CompleteJobAsync(job.Id, new()
+            await _service.CompleteJobAsync(job.Id, new Dictionary<string, VariableValue>
             {
-                ["inventorySufficient"] = new VariableValue { Value = true, Type = "Boolean" }
+                ["inventorySufficient"] = new() { Value = true, Type = "Boolean" }
             });
             MessageBox.Show("موجودی تایید شد.", "موفق", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
@@ -65,9 +65,9 @@ public partial class CheckInventoryForm : Form
             var jobs = await _service.FetchJobsAsync("check-inventory");
             var job = jobs.FirstOrDefault(j => j.ProcessInstanceId == _processInstanceId)
                       ?? throw new Exception("job یافت نشد");
-            await _service.CompleteJobAsync(job.Id, new()
+            await _service.CompleteJobAsync(job.Id, new Dictionary<string, VariableValue>
             {
-                ["inventorySufficient"] = new VariableValue { Value = false, Type = "Boolean" }
+                ["inventorySufficient"] = new() { Value = false, Type = "Boolean" }
             });
             MessageBox.Show("موجودی ناکافی.", "اطلاع", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
@@ -80,5 +80,8 @@ public partial class CheckInventoryForm : Form
         }
     }
 
-    private void btnClose_Click(object sender, EventArgs e) => Close();
+    private void btnClose_Click(object sender, EventArgs e)
+    {
+        Close();
+    }
 }

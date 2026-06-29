@@ -6,8 +6,8 @@ namespace Camunda.App.Forms;
 // ─── CreateInvoiceForm ─────────────────────────────────────────────────────────
 public partial class CreateInvoiceForm : Form
 {
-    private readonly CamundaService _service;
     private readonly string _processInstanceId;
+    private readonly CamundaService _service;
 
     public CreateInvoiceForm(CamundaService service, string processInstanceId)
     {
@@ -43,12 +43,13 @@ public partial class CreateInvoiceForm : Form
             var jobs = await _service.FetchJobsAsync("create-invoice");
             var job = jobs.FirstOrDefault(j => j.ProcessInstanceId == _processInstanceId)
                       ?? throw new Exception("job یافت نشد");
-            await _service.CompleteJobAsync(job.Id, new()
+            await _service.CompleteJobAsync(job.Id, new Dictionary<string, VariableValue>
             {
-                ["invoiceId"] = new VariableValue { Value = lblInvoiceId.Text, Type = "String" },
-                ["invoiceDate"] = new VariableValue { Value = lblInvoiceDate.Text, Type = "String" }
+                ["invoiceId"] = new() { Value = lblInvoiceId.Text, Type = "String" },
+                ["invoiceDate"] = new() { Value = lblInvoiceDate.Text, Type = "String" }
             });
-            MessageBox.Show($"فاکتور صادر شد.\nشماره: {lblInvoiceId.Text}", "موفق", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"فاکتور صادر شد.\nشماره: {lblInvoiceId.Text}", "موفق", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
             Close();
         }
         catch (Exception ex)
@@ -58,14 +59,17 @@ public partial class CreateInvoiceForm : Form
         }
     }
 
-    private void btnClose_Click(object sender, EventArgs e) => Close();
+    private void btnClose_Click(object sender, EventArgs e)
+    {
+        Close();
+    }
 }
 
 // ─── ShipOrderForm ─────────────────────────────────────────────────────────────
 public partial class ShipOrderForm : Form
 {
-    private readonly CamundaService _service;
     private readonly string _processInstanceId;
+    private readonly CamundaService _service;
 
     public ShipOrderForm(CamundaService service, string processInstanceId)
     {
@@ -100,12 +104,13 @@ public partial class ShipOrderForm : Form
             var jobs = await _service.FetchJobsAsync("ship-order");
             var job = jobs.FirstOrDefault(j => j.ProcessInstanceId == _processInstanceId)
                       ?? throw new Exception("job یافت نشد");
-            await _service.CompleteJobAsync(job.Id, new()
+            await _service.CompleteJobAsync(job.Id, new Dictionary<string, VariableValue>
             {
-                ["trackingCode"] = new VariableValue { Value = txtTrackingCode.Text, Type = "String" },
-                ["shippedAt"] = new VariableValue { Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm"), Type = "String" }
+                ["trackingCode"] = new() { Value = txtTrackingCode.Text, Type = "String" },
+                ["shippedAt"] = new() { Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm"), Type = "String" }
             });
-            MessageBox.Show($"سفارش ارسال شد.\nکد رهگیری: {txtTrackingCode.Text}", "موفق", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"سفارش ارسال شد.\nکد رهگیری: {txtTrackingCode.Text}", "موفق", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
             Close();
         }
         catch (Exception ex)
@@ -115,14 +120,17 @@ public partial class ShipOrderForm : Form
         }
     }
 
-    private void btnClose_Click(object sender, EventArgs e) => Close();
+    private void btnClose_Click(object sender, EventArgs e)
+    {
+        Close();
+    }
 }
 
 // ─── RejectOrderForm ───────────────────────────────────────────────────────────
 public partial class RejectOrderForm : Form
 {
-    private readonly CamundaService _service;
     private readonly string _processInstanceId;
+    private readonly CamundaService _service;
 
     public RejectOrderForm(CamundaService service, string processInstanceId)
     {
@@ -155,10 +163,10 @@ public partial class RejectOrderForm : Form
             var jobs = await _service.FetchJobsAsync("reject-order");
             var job = jobs.FirstOrDefault(j => j.ProcessInstanceId == _processInstanceId)
                       ?? throw new Exception("job یافت نشد");
-            await _service.CompleteJobAsync(job.Id, new()
+            await _service.CompleteJobAsync(job.Id, new Dictionary<string, VariableValue>
             {
-                ["rejectedAt"] = new VariableValue { Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm"), Type = "String" },
-                ["rejectReason"] = new VariableValue { Value = txtRejectReason.Text, Type = "String" }
+                ["rejectedAt"] = new() { Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm"), Type = "String" },
+                ["rejectReason"] = new() { Value = txtRejectReason.Text, Type = "String" }
             });
             MessageBox.Show("سفارش رد شد.", "اطلاع", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
@@ -170,14 +178,17 @@ public partial class RejectOrderForm : Form
         }
     }
 
-    private void btnClose_Click(object sender, EventArgs e) => Close();
+    private void btnClose_Click(object sender, EventArgs e)
+    {
+        Close();
+    }
 }
 
 // ─── NotifyCustomerForm ────────────────────────────────────────────────────────
 public partial class NotifyCustomerForm : Form
 {
-    private readonly CamundaService _service;
     private readonly string _processInstanceId;
+    private readonly CamundaService _service;
 
     public NotifyCustomerForm(CamundaService service, string processInstanceId)
     {
@@ -211,9 +222,9 @@ public partial class NotifyCustomerForm : Form
             var jobs = await _service.FetchJobsAsync("send-email");
             var job = jobs.FirstOrDefault(j => j.ProcessInstanceId == _processInstanceId)
                       ?? throw new Exception("job یافت نشد");
-            await _service.CompleteJobAsync(job.Id, new()
+            await _service.CompleteJobAsync(job.Id, new Dictionary<string, VariableValue>
             {
-                ["emailSentAt"] = new VariableValue { Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm"), Type = "String" }
+                ["emailSentAt"] = new() { Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm"), Type = "String" }
             });
             MessageBox.Show("اطلاع‌رسانی ارسال شد.", "موفق", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
@@ -225,5 +236,8 @@ public partial class NotifyCustomerForm : Form
         }
     }
 
-    private void btnClose_Click(object sender, EventArgs e) => Close();
+    private void btnClose_Click(object sender, EventArgs e)
+    {
+        Close();
+    }
 }

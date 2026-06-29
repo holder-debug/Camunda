@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Camunda.Infra.Models;
 using Newtonsoft.Json;
@@ -6,8 +7,8 @@ namespace Camunda.Infra.Services;
 
 public class CamundaService
 {
-    private readonly HttpClient _httpClient;
     private const string ProcessKey = "order-process";
+    private readonly HttpClient _httpClient;
 
     public CamundaService(string baseUrl)
     {
@@ -18,7 +19,7 @@ public class CamundaService
             Timeout = TimeSpan.FromSeconds(30)
         };
         _httpClient.DefaultRequestHeaders.Accept.Add(
-            new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            new MediaTypeWithQualityHeaderValue("application/json"));
     }
 
     // ─── Start Process ─────────────────────────────────────────────────────────
@@ -31,12 +32,12 @@ public class CamundaService
             businessId = orderId,
             variables = new Dictionary<string, object>
             {
-                ["orderId"]               = new { value = orderId },
-                ["customerName"]          = new { value = customerName },
-                ["customerEmail"]         = new { value = customerEmail },
-                ["quantity"]              = new { value = quantity },
-                ["valid"]                 = new { value = false },
-                ["inventorySufficient"]   = new { value = false }
+                ["orderId"] = new { value = orderId },
+                ["customerName"] = new { value = customerName },
+                ["customerEmail"] = new { value = customerEmail },
+                ["quantity"] = new { value = quantity },
+                ["valid"] = new { value = false },
+                ["inventorySufficient"] = new { value = false }
             }
         };
 
@@ -80,10 +81,10 @@ public class CamundaService
         if (!response.IsSuccessStatusCode)
             throw new Exception($"خطا در دریافت پروسه‌ها: {content}");
 
-        var www = (content); // موقت اضافه کن
+        var www = content; // موقت اضافه کن
 
         var result = JsonConvert.DeserializeObject<ProcessInstanceSearchResponse>(content);
-        return result?.Items ?? new();
+        return result?.Items ?? new List<ProcessInstance>();
     }
 
     // ─── Get Current Activity (Flownode) ──────────────────────────────────────
@@ -101,11 +102,11 @@ public class CamundaService
             throw new Exception($"خطا در دریافت activity: {content}");
 
 
-        var ww = (content);
+        var ww = content;
 
 
         var result = JsonConvert.DeserializeObject<FlownodeSearchResponse>(content);
-        var items = result?.Items ?? new();
+        var items = result?.Items ?? new List<FlownodeInstance>();
 
         // فقط ACTIVE node ها رو برگردون
         var activeNode = items.FirstOrDefault(x => x.State == "ACTIVE");
@@ -143,7 +144,7 @@ public class CamundaService
             throw new Exception($"خطا در دریافت variables: {content}");
 
         var result = JsonConvert.DeserializeObject<VariableSearchResponse>(content);
-        return result?.Items?.ToDictionary(v => v.Name, v => v.Value) ?? new();
+        return result?.Items?.ToDictionary(v => v.Name, v => v.Value) ?? new Dictionary<string, object?>();
     }
 
     // ─── Fetch & Complete Job ──────────────────────────────────────────────────
@@ -166,7 +167,7 @@ public class CamundaService
             throw new Exception($"خطا در دریافت jobs: {content}");
 
         var result = JsonConvert.DeserializeObject<JobSearchResponse>(content);
-        return result?.Items ?? new();
+        return result?.Items ?? new List<Job>();
     }
 
     public async Task CompleteJobAsync(string jobKey, Dictionary<string, VariableValue> variables)

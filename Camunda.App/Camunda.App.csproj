@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Camunda.Infra\Camunda.Infra.csproj" />
+		<ProjectReference Include="..\Camunda.Infra\Camunda.Infra.csproj" />
 	</ItemGroup>
 
 </Project>

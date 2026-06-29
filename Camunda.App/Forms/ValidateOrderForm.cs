@@ -5,8 +5,8 @@ namespace Camunda.App.Forms;
 
 public partial class ValidateOrderForm : Form
 {
-    private readonly CamundaService _service;
     private readonly string _processInstanceId;
+    private readonly CamundaService _service;
 
     public ValidateOrderForm(CamundaService service, string processInstanceId)
     {
@@ -42,9 +42,9 @@ public partial class ValidateOrderForm : Form
             var jobs = await _service.FetchJobsAsync("validate-order");
             var job = jobs.FirstOrDefault(j => j.ProcessInstanceId == _processInstanceId)
                       ?? throw new Exception("job یافت نشد");
-            await _service.CompleteJobAsync(job.Id, new()
+            await _service.CompleteJobAsync(job.Id, new Dictionary<string, VariableValue>
             {
-                ["valid"] = new VariableValue { Value = true, Type = "Boolean" }
+                ["valid"] = new() { Value = true, Type = "Boolean" }
             });
             MessageBox.Show("سفارش تایید شد.", "موفق", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
@@ -66,9 +66,9 @@ public partial class ValidateOrderForm : Form
             var jobs = await _service.FetchJobsAsync("validate-order");
             var job = jobs.FirstOrDefault(j => j.ProcessInstanceId == _processInstanceId)
                       ?? throw new Exception("job یافت نشد");
-            await _service.CompleteJobAsync(job.Id, new()
+            await _service.CompleteJobAsync(job.Id, new Dictionary<string, VariableValue>
             {
-                ["valid"] = new VariableValue { Value = false, Type = "Boolean" }
+                ["valid"] = new() { Value = false, Type = "Boolean" }
             });
             MessageBox.Show("سفارش رد شد.", "اطلاع", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
@@ -81,5 +81,8 @@ public partial class ValidateOrderForm : Form
         }
     }
 
-    private void btnClose_Click(object sender, EventArgs e) => Close();
+    private void btnClose_Click(object sender, EventArgs e)
+    {
+        Close();
+    }
 }

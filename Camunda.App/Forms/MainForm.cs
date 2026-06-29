@@ -1,11 +1,12 @@
 using Camunda.Infra.Services;
+using Timer = System.Windows.Forms.Timer;
 
 namespace Camunda.App.Forms;
 
 public partial class MainForm : Form
 {
     private readonly CamundaService _service;
-    private System.Windows.Forms.Timer _timer = null!;
+    private Timer _timer = null!;
 
     public MainForm(CamundaService service)
     {
@@ -17,7 +18,7 @@ public partial class MainForm : Form
 
     private void StartAutoRefresh()
     {
-        _timer = new System.Windows.Forms.Timer { Interval = 10000 };
+        _timer = new Timer { Interval = 10000 };
         _timer.Tick += async (s, e) => await LoadProcessesAsync();
         _timer.Start();
     }
@@ -55,7 +56,10 @@ public partial class MainForm : Form
                        ?? activity.ChildActivityInstances[0].ActivityId;
             return "در انتظار";
         }
-        catch { return "نامشخص"; }
+        catch
+        {
+            return "نامشخص";
+        }
     }
 
     private void btnNewOrder_Click(object sender, EventArgs e)
@@ -87,18 +91,19 @@ public partial class MainForm : Form
 
             Form? taskForm = currentTask.ActivityId switch
             {
-                "validate-order"             => new ValidateOrderForm(_service, processInstanceId),
-                "check-inventory"            => new CheckInventoryForm(_service, processInstanceId),
-                "create-invoice"             => new CreateInvoiceForm(_service, processInstanceId),
-                "ship-order"                 => new ShipOrderForm(_service, processInstanceId),
-                "reject-order"               => new RejectOrderForm(_service, processInstanceId),
+                "validate-order" => new ValidateOrderForm(_service, processInstanceId),
+                "check-inventory" => new CheckInventoryForm(_service, processInstanceId),
+                "create-invoice" => new CreateInvoiceForm(_service, processInstanceId),
+                "ship-order" => new ShipOrderForm(_service, processInstanceId),
+                "reject-order" => new RejectOrderForm(_service, processInstanceId),
                 "notify-customer-outofstock" => new NotifyCustomerForm(_service, processInstanceId),
                 _ => null
             };
 
             if (taskForm == null)
             {
-                MessageBox.Show($"فرم برای «{currentTask.ActivityId}» تعریف نشده.", "اطلاع", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"فرم برای «{currentTask.ActivityId}» تعریف نشده.", "اطلاع", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
