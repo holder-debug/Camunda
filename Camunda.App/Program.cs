@@ -1,3 +1,6 @@
+using Camunda.App.Forms;
+using Camunda.Infra.Services;
+
 namespace Camunda.App;
 
 internal static class Program
@@ -8,9 +11,9 @@ internal static class Program
     [STAThread]
     private static void Main()
     {
-        // To customize application configuration such as set high DPI settings or default font,
-        // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
-        Application.Run(new Form1());
+        const string camundaBaseUrl = "http://localhost:8080/v2";
+        var service = new CamundaService(camundaBaseUrl);
+        Application.Run(new MainForm(service));
     }
 }

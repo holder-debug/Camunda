@@ -8,4 +8,8 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Camunda.Infra\Camunda.Infra.csproj" />
+	</ItemGroup>
+
 </Project>
