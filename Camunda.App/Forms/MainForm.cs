@@ -126,4 +126,20 @@ public partial class MainForm : Form
         _timer?.Stop();
         base.OnFormClosed(e);
     }
+
+ 
+
+    private void btnDelete_Click(object sender, EventArgs e)
+    {
+        var authOptions = new CamundaAuthOptions
+        {
+            BaseUrl = "http://localhost:8080/v2/process-instances/",
+            Username = "demo",
+            Password = "demo"
+        };
+
+        var service = new CamundaProcessInstanceService(new HttpClient(), authOptions);
+        var form = new ProcessInstanceActionsForm(service);
+        form.ShowDialog();
+    }
 }
