@@ -134,7 +134,7 @@ public class CamundaService
     {
         var request = new
         {
-            filter = new { processInstanceKey = long.Parse(processInstanceId) },
+            filter = new { processInstanceKey =(processInstanceId) },
             page = new { from = 0, limit = 100 }
         };
 
@@ -156,7 +156,7 @@ public class CamundaService
             {
                 processInstanceKey = (string?)null,
                 type = jobType,
-                state = "ACTIVATABLE"
+                state = "CREATED"
             },
             page = new { from = 0, limit = 10 }
         };

@@ -18,7 +18,7 @@ public partial class MainForm : Form
 
     private void StartAutoRefresh()
     {
-        _timer = new Timer { Interval = 10000 };
+        _timer = new Timer { Interval = 1000000000 };
         _timer.Tick += async (s, e) => await LoadProcessesAsync();
         _timer.Start();
     }

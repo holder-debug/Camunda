@@ -111,6 +111,9 @@ public class Job
     public string ProcessInstanceId => ProcessInstanceKey.ToString();
 
     [JsonProperty("type")] public string TopicName { get; set; } = "";
+
+    [JsonProperty("jobKey")]
+    public string JobKey { get; set; } 
 }
 
 public class JobSearchResponse

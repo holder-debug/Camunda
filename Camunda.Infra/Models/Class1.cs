@@ -35,16 +35,16 @@ namespace Camunda.Infra.Models
     //        FAILED
     //    }
 
-    //    [JsonConverter(typeof(JsonStringEnumConverter))]
-    //    public enum JobState
-    //    {
-    //        ACTIVATABLE,
-    //        ACTIVE,
-    //        FAILED,
-    //        ERROR_THROWN,
-    //        COMPLETED,
-    //        CANCELED
-    //    }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum JobState
+    {
+        ACTIVATABLE,
+        ACTIVE,
+        FAILED,
+        ERROR_THROWN,
+        COMPLETED,
+        CANCELED
+    }
 
     //    [JsonConverter(typeof(JsonStringEnumConverter))]
     //    public enum IncidentState

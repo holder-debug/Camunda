@@ -42,7 +42,7 @@ public partial class ValidateOrderForm : Form
             var jobs = await _service.FetchJobsAsync("validate-order");
             var job = jobs.FirstOrDefault(j => j.ProcessInstanceId == _processInstanceId)
                       ?? throw new Exception("job یافت نشد");
-            await _service.CompleteJobAsync(job.Id, new Dictionary<string, VariableValue>
+            await _service.CompleteJobAsync(job.JobKey, new Dictionary<string, VariableValue>
             {
                 ["valid"] = new() { Value = true, Type = "Boolean" }
             });
