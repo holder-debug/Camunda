@@ -12,7 +12,7 @@ internal static class Program
     private static void Main()
     {
         ApplicationConfiguration.Initialize();
-        const string camundaBaseUrl = "http://localhost:8080/v2";
+        const string camundaBaseUrl = "http://localhost:8080";
         var service = new CamundaService(camundaBaseUrl);
         Application.Run(new MainForm(service));
     }

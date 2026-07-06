@@ -11,7 +11,7 @@ namespace Camunda.Infra.Endpoints
         public const string Topology = "v2/topology";
 
         // ── Process Definitions ───────────────────────────────
-        public const string ProcessDefinitions = "v2/process-definitions";
+        public const string ProcessDefinitions1 = "v2/process-definitions";
         public const string ProcessDefinitionByKey = "v2/process-definitions/{0}";
         public const string ProcessDefinitionXml = "v2/process-definitions/{0}/xml";
         public const string ProcessDefinitionSearch = "v2/process-definitions/search";
