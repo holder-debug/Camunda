@@ -96,16 +96,13 @@ public class CamundaService
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
     }
 
-
-    
-
     public async Task<JobListResponse> ActivateJobsAsync(string jobType, int maxJobs = 100)
     {
         var request = new
         {
             type = jobType,
-            worker = "WinFormsWorker",
-            timeout = 300000,
+            worker = "ManagerFormWorker",
+            timeout = 10000,
             maxJobsToActivate = maxJobs
         };
 
@@ -115,6 +112,8 @@ public class CamundaService
         var response = await _httpClient.PostAsync($"{_baseUrl}/v2/jobs/activation", content);
         var responseString = await response.Content.ReadAsStringAsync();
 
+ 
+
         if (!response.IsSuccessStatusCode)
             throw new Exception($"Failed to activate jobs: {responseString}");
 
@@ -122,7 +121,8 @@ public class CamundaService
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
     }
 
-    public async Task CompleteJobAsync(long jobKey, Dictionary<string, object> variables = null)
+
+    public async Task CompleteJobAsync(string jobKey, Dictionary<string, object> variables = null)
     {
         var request = new
         {

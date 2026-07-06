@@ -107,7 +107,7 @@ namespace Camunda.Appp
                 }
 
                 var variables = new Dictionary<string, object> { { "approvalDecision", decision } };
-                await _camundaService.CompleteJobAsync(targetJob.JobKey, variables);
+                await _camundaService.CompleteJobAsync(targetJob.JobKey.ToString(), variables);
 
                 return true;
             }

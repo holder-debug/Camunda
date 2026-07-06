@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
  
@@ -74,7 +75,7 @@ using System.Text.Json.Serialization;
     public class Job
     {
         [JsonPropertyName("jobKey")]
-        public long JobKey { get; set; }
+        public string JobKey { get; set; }
 
         [JsonPropertyName("processInstanceKey")]
         public string ProcessInstanceKey { get; set; }
@@ -83,7 +84,7 @@ using System.Text.Json.Serialization;
         public string Type { get; set; }
 
         [JsonPropertyName("variables")]
-        public string Variables { get; set; }
+        public JsonElement Variables { get; set; }
     }
 
     public class JobListResponse
