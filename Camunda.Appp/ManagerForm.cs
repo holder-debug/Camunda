@@ -157,5 +157,64 @@ namespace Camunda.Appp
         }
 
         private void BtnRefresh_Click(object sender, EventArgs e) => LoadPendingRequests();
+
+        private async void BtnEnd_Click(object sender, EventArgs e)
+        {
+            if (dgvRequests.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("لطفاً یک درخواست را انتخاب کنید", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var row = dgvRequests.SelectedRows[0];
+            var processInstanceKey = row.Cells["ProcessInstanceKey"].Value?.ToString();
+
+            try
+            {
+                // گرفتن متغیرها برای بررسی وضعیت
+                var variablesResponse = await _camundaService.GetVariablesAsync(processInstanceKey);
+                var variables = variablesResponse.Items ?? new List<Variable>();
+
+                // بررسی اینکه آیا approvalDecision وجود دارد یا نه
+                var decisionVar = variables.FirstOrDefault(v => v.Name == "approvalDecision");
+
+                if (decisionVar == null)
+                {
+                    MessageBox.Show("این درخواست هنوز در مرحله بررسی مدیر است. ابتدا باید تایید یا رد شود.",
+                        "خطا", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string decision = decisionVar.Value?.Trim('"');
+                string finalJobType = decision == "approved" ? "process-approval" : "process-rejection";
+
+                // پیدا کردن Job نهایی
+                var finalJobs = await _camundaService.ActivateJobsAsync(finalJobType, 100);
+                var finalJob = finalJobs.Jobs?.FirstOrDefault(j => j.ProcessInstanceKey == processInstanceKey);
+
+                if (finalJob == null)
+                {
+                    MessageBox.Show("Job نهایی پیدا نشد. ممکن است فرآیند قبلاً کامل شده باشد.", "اطلاعات", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Complete کردن Job نهایی
+                var finalVariables = new Dictionary<string, object>
+                {
+                    { "finalStatus", decision == "approved" ? "APPROVED" : "REJECTED" },
+                    { "processedAt", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") }
+                };
+
+                await _camundaService.CompleteJobAsync((finalJob.JobKey), finalVariables);
+
+                MessageBox.Show($"درخواست با موفقیت {decision} شد و فرآیند به پایان رسید.", "موفقیت", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                LoadPendingRequests();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"خطا: {ex.Message}", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

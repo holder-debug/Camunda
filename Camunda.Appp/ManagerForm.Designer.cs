@@ -15,147 +15,165 @@
 
         private void InitializeComponent()
         {
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.lblProcessInstances = new System.Windows.Forms.Label();
-            this.dgvRequests = new System.Windows.Forms.DataGridView();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnApprove = new System.Windows.Forms.Button();
-            this.btnReject = new System.Windows.Forms.Button();
-            this.lblDetails = new System.Windows.Forms.Label();
-            this.txtDetails = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRequests)).BeginInit();
-            this.SuspendLayout();
+            lblTitle = new Label();
+            lblProcessInstances = new Label();
+            dgvRequests = new DataGridView();
+            btnRefresh = new Button();
+            btnApprove = new Button();
+            btnReject = new Button();
+            lblDetails = new Label();
+            txtDetails = new TextBox();
+            BtnEnd = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvRequests).BeginInit();
+            SuspendLayout();
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.Location = new System.Drawing.Point(520, 15);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblTitle.Size = new System.Drawing.Size(260, 23);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "مدیریت درخواست‌های مرخصی";
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Tahoma", 14F, FontStyle.Bold);
+            lblTitle.Location = new Point(520, 15);
+            lblTitle.Name = "lblTitle";
+            lblTitle.RightToLeft = RightToLeft.Yes;
+            lblTitle.Size = new Size(291, 23);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "مدیریت درخواست‌های مرخصی";
             // 
             // lblProcessInstances
             // 
-            this.lblProcessInstances.AutoSize = true;
-            this.lblProcessInstances.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.lblProcessInstances.Location = new System.Drawing.Point(650, 60);
-            this.lblProcessInstances.Name = "lblProcessInstances";
-            this.lblProcessInstances.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblProcessInstances.Size = new System.Drawing.Size(130, 17);
-            this.lblProcessInstances.TabIndex = 1;
-            this.lblProcessInstances.Text = "درخواست‌ها:";
+            lblProcessInstances.AutoSize = true;
+            lblProcessInstances.Font = new Font("Tahoma", 10F, FontStyle.Bold);
+            lblProcessInstances.Location = new Point(650, 60);
+            lblProcessInstances.Name = "lblProcessInstances";
+            lblProcessInstances.RightToLeft = RightToLeft.Yes;
+            lblProcessInstances.Size = new Size(95, 17);
+            lblProcessInstances.TabIndex = 1;
+            lblProcessInstances.Text = "درخواست‌ها:";
             // 
             // dgvRequests
             // 
-            this.dgvRequests.AllowUserToAddRows = false;
-            this.dgvRequests.AllowUserToDeleteRows = false;
-            this.dgvRequests.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRequests.Location = new System.Drawing.Point(50, 90);
-            this.dgvRequests.MultiSelect = false;
-            this.dgvRequests.Name = "dgvRequests";
-            this.dgvRequests.ReadOnly = true;
-            this.dgvRequests.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dgvRequests.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRequests.Size = new System.Drawing.Size(700, 200);
-            this.dgvRequests.TabIndex = 2;
-            this.dgvRequests.SelectionChanged += new System.EventHandler(this.DgvRequests_SelectionChanged);
+            dgvRequests.AllowUserToAddRows = false;
+            dgvRequests.AllowUserToDeleteRows = false;
+            dgvRequests.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvRequests.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRequests.Location = new Point(50, 90);
+            dgvRequests.MultiSelect = false;
+            dgvRequests.Name = "dgvRequests";
+            dgvRequests.ReadOnly = true;
+            dgvRequests.RightToLeft = RightToLeft.Yes;
+            dgvRequests.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvRequests.Size = new Size(700, 200);
+            dgvRequests.TabIndex = 2;
+            dgvRequests.SelectionChanged += DgvRequests_SelectionChanged;
             // 
             // btnRefresh
             // 
-            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(0, 120, 215);
-            this.btnRefresh.FlatAppearance.BorderSize = 0;
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefresh.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Location = new System.Drawing.Point(50, 55);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnRefresh.Size = new System.Drawing.Size(100, 30);
-            this.btnRefresh.TabIndex = 3;
-            this.btnRefresh.Text = "بارگذاری مجدد";
-            this.btnRefresh.UseVisualStyleBackColor = false;
-            this.btnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
+            btnRefresh.BackColor = Color.FromArgb(0, 120, 215);
+            btnRefresh.FlatAppearance.BorderSize = 0;
+            btnRefresh.FlatStyle = FlatStyle.Flat;
+            btnRefresh.Font = new Font("Tahoma", 9F);
+            btnRefresh.ForeColor = Color.White;
+            btnRefresh.Location = new Point(50, 55);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.RightToLeft = RightToLeft.Yes;
+            btnRefresh.Size = new Size(100, 30);
+            btnRefresh.TabIndex = 3;
+            btnRefresh.Text = "بارگذاری مجدد";
+            btnRefresh.UseVisualStyleBackColor = false;
+            btnRefresh.Click += BtnRefresh_Click;
             // 
             // btnApprove
             // 
-            this.btnApprove.BackColor = System.Drawing.Color.FromArgb(16, 124, 16);
-            this.btnApprove.FlatAppearance.BorderSize = 0;
-            this.btnApprove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnApprove.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.btnApprove.ForeColor = System.Drawing.Color.White;
-            this.btnApprove.Location = new System.Drawing.Point(520, 310);
-            this.btnApprove.Name = "btnApprove";
-            this.btnApprove.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnApprove.Size = new System.Drawing.Size(110, 40);
-            this.btnApprove.TabIndex = 4;
-            this.btnApprove.Text = "تایید";
-            this.btnApprove.UseVisualStyleBackColor = false;
-            this.btnApprove.Click += new System.EventHandler(this.BtnApprove_Click);
+            btnApprove.BackColor = Color.FromArgb(16, 124, 16);
+            btnApprove.FlatAppearance.BorderSize = 0;
+            btnApprove.FlatStyle = FlatStyle.Flat;
+            btnApprove.Font = new Font("Tahoma", 10F);
+            btnApprove.ForeColor = Color.White;
+            btnApprove.Location = new Point(520, 310);
+            btnApprove.Name = "btnApprove";
+            btnApprove.RightToLeft = RightToLeft.Yes;
+            btnApprove.Size = new Size(110, 40);
+            btnApprove.TabIndex = 4;
+            btnApprove.Text = "تایید";
+            btnApprove.UseVisualStyleBackColor = false;
+            btnApprove.Click += BtnApprove_Click;
             // 
             // btnReject
             // 
-            this.btnReject.BackColor = System.Drawing.Color.FromArgb(200, 50, 50);
-            this.btnReject.FlatAppearance.BorderSize = 0;
-            this.btnReject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReject.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.btnReject.ForeColor = System.Drawing.Color.White;
-            this.btnReject.Location = new System.Drawing.Point(390, 310);
-            this.btnReject.Name = "btnReject";
-            this.btnReject.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnReject.Size = new System.Drawing.Size(110, 40);
-            this.btnReject.TabIndex = 5;
-            this.btnReject.Text = "رد";
-            this.btnReject.UseVisualStyleBackColor = false;
-            this.btnReject.Click += new System.EventHandler(this.BtnReject_Click);
+            btnReject.BackColor = Color.FromArgb(200, 50, 50);
+            btnReject.FlatAppearance.BorderSize = 0;
+            btnReject.FlatStyle = FlatStyle.Flat;
+            btnReject.Font = new Font("Tahoma", 10F);
+            btnReject.ForeColor = Color.White;
+            btnReject.Location = new Point(390, 310);
+            btnReject.Name = "btnReject";
+            btnReject.RightToLeft = RightToLeft.Yes;
+            btnReject.Size = new Size(110, 40);
+            btnReject.TabIndex = 5;
+            btnReject.Text = "رد";
+            btnReject.UseVisualStyleBackColor = false;
+            btnReject.Click += BtnReject_Click;
             // 
             // lblDetails
             // 
-            this.lblDetails.AutoSize = true;
-            this.lblDetails.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.lblDetails.Location = new System.Drawing.Point(650, 315);
-            this.lblDetails.Name = "lblDetails";
-            this.lblDetails.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblDetails.Size = new System.Drawing.Size(130, 17);
-            this.lblDetails.TabIndex = 6;
-            this.lblDetails.Text = "جزئیات درخواست:";
+            lblDetails.AutoSize = true;
+            lblDetails.Font = new Font("Tahoma", 10F, FontStyle.Bold);
+            lblDetails.Location = new Point(650, 315);
+            lblDetails.Name = "lblDetails";
+            lblDetails.RightToLeft = RightToLeft.Yes;
+            lblDetails.Size = new Size(129, 17);
+            lblDetails.TabIndex = 6;
+            lblDetails.Text = "جزئیات درخواست:";
             // 
             // txtDetails
             // 
-            this.txtDetails.Location = new System.Drawing.Point(50, 310);
-            this.txtDetails.Multiline = true;
-            this.txtDetails.Name = "txtDetails";
-            this.txtDetails.ReadOnly = true;
-            this.txtDetails.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtDetails.Size = new System.Drawing.Size(320, 80);
-            this.txtDetails.TabIndex = 7;
+            txtDetails.Location = new Point(50, 310);
+            txtDetails.Multiline = true;
+            txtDetails.Name = "txtDetails";
+            txtDetails.ReadOnly = true;
+            txtDetails.RightToLeft = RightToLeft.Yes;
+            txtDetails.Size = new Size(320, 80);
+            txtDetails.TabIndex = 7;
+            // 
+            // BtnEnd
+            // 
+            BtnEnd.BackColor = Color.FromArgb(0, 120, 215);
+            BtnEnd.FlatAppearance.BorderSize = 0;
+            BtnEnd.FlatStyle = FlatStyle.Flat;
+            BtnEnd.Font = new Font("Tahoma", 9F);
+            BtnEnd.ForeColor = Color.White;
+            BtnEnd.Location = new Point(390, 356);
+            BtnEnd.Name = "BtnEnd";
+            BtnEnd.RightToLeft = RightToLeft.Yes;
+            BtnEnd.Size = new Size(240, 40);
+            BtnEnd.TabIndex = 8;
+            BtnEnd.Text = "خاتمه";
+            BtnEnd.UseVisualStyleBackColor = false;
+            BtnEnd.Click += BtnEnd_Click;
             // 
             // ManagerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 400);
-            this.Controls.Add(this.txtDetails);
-            this.Controls.Add(this.lblDetails);
-            this.Controls.Add(this.btnReject);
-            this.Controls.Add(this.btnApprove);
-            this.Controls.Add(this.btnRefresh);
-            this.Controls.Add(this.dgvRequests);
-            this.Controls.Add(this.lblProcessInstances);
-            this.Controls.Add(this.lblTitle);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "ManagerForm";
-            this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.RightToLeftLayout = true;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "پنل مدیریت - تایید مرخصی";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRequests)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 400);
+            Controls.Add(BtnEnd);
+            Controls.Add(txtDetails);
+            Controls.Add(lblDetails);
+            Controls.Add(btnReject);
+            Controls.Add(btnApprove);
+            Controls.Add(btnRefresh);
+            Controls.Add(dgvRequests);
+            Controls.Add(lblProcessInstances);
+            Controls.Add(lblTitle);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            Name = "ManagerForm";
+            RightToLeft = RightToLeft.Yes;
+            RightToLeftLayout = true;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "پنل مدیریت - تایید مرخصی";
+            ((System.ComponentModel.ISupportInitialize)dgvRequests).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -168,5 +186,6 @@
         private System.Windows.Forms.Button btnReject;
         private System.Windows.Forms.Label lblDetails;
         private System.Windows.Forms.TextBox txtDetails;
+        private Button BtnEnd;
     }
 }
