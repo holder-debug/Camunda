@@ -36,7 +36,6 @@ public class CamundaService
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
     }
 
-
     public async Task<ProcessInstanceListResponse> GetProcessInstancesAsync(string processDefinitionId = null, string state = null)
     {
         var url = $"{_baseUrl}/v2/process-instances/search";
@@ -69,7 +68,6 @@ public class CamundaService
         return JsonSerializer.Deserialize<ProcessInstanceListResponse>(responseString,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
     }
-
 
     public async Task<VariableListResponse> GetVariablesAsync(string processInstanceKey)
     {
@@ -120,7 +118,6 @@ public class CamundaService
         return JsonSerializer.Deserialize<JobListResponse>(responseString,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
     }
-
 
     public async Task CompleteJobAsync(string jobKey, Dictionary<string, object> variables = null)
     {
