@@ -26,5 +26,11 @@ namespace Camunda.Appp
             var form = new ManagerForm(_camundaService);
             form.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var form = new RuleBuilderForm();
+            form.ShowDialog();
+        }
     }
 }

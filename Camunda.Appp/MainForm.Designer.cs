@@ -15,69 +15,87 @@
 
         private void InitializeComponent()
         {
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.btnEmployeeRequest = new System.Windows.Forms.Button();
-            this.btnManagerView = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            lblTitle = new Label();
+            btnEmployeeRequest = new Button();
+            btnManagerView = new Button();
+            button1 = new Button();
+            SuspendLayout();
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.Location = new System.Drawing.Point(95, 40);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblTitle.Size = new System.Drawing.Size(210, 27);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "سیستم درخواست مرخصی";
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Tahoma", 16F, FontStyle.Bold);
+            lblTitle.Location = new Point(95, 38);
+            lblTitle.Name = "lblTitle";
+            lblTitle.RightToLeft = RightToLeft.Yes;
+            lblTitle.Size = new Size(299, 27);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "سیستم درخواست مرخصی";
             // 
             // btnEmployeeRequest
             // 
-            this.btnEmployeeRequest.BackColor = System.Drawing.Color.FromArgb(0, 120, 215);
-            this.btnEmployeeRequest.FlatAppearance.BorderSize = 0;
-            this.btnEmployeeRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEmployeeRequest.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.btnEmployeeRequest.ForeColor = System.Drawing.Color.White;
-            this.btnEmployeeRequest.Location = new System.Drawing.Point(70, 100);
-            this.btnEmployeeRequest.Name = "btnEmployeeRequest";
-            this.btnEmployeeRequest.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnEmployeeRequest.Size = new System.Drawing.Size(260, 50);
-            this.btnEmployeeRequest.TabIndex = 1;
-            this.btnEmployeeRequest.Text = "ثبت درخواست مرخصی (کارمند)";
-            this.btnEmployeeRequest.UseVisualStyleBackColor = false;
-            this.btnEmployeeRequest.Click += new System.EventHandler(this.BtnEmployeeRequest_Click);
+            btnEmployeeRequest.BackColor = Color.FromArgb(0, 120, 215);
+            btnEmployeeRequest.FlatAppearance.BorderSize = 0;
+            btnEmployeeRequest.FlatStyle = FlatStyle.Flat;
+            btnEmployeeRequest.Font = new Font("Tahoma", 10F);
+            btnEmployeeRequest.ForeColor = Color.White;
+            btnEmployeeRequest.Location = new Point(70, 94);
+            btnEmployeeRequest.Name = "btnEmployeeRequest";
+            btnEmployeeRequest.RightToLeft = RightToLeft.Yes;
+            btnEmployeeRequest.Size = new Size(260, 47);
+            btnEmployeeRequest.TabIndex = 1;
+            btnEmployeeRequest.Text = "ثبت درخواست مرخصی (کارمند)";
+            btnEmployeeRequest.UseVisualStyleBackColor = false;
+            btnEmployeeRequest.Click += BtnEmployeeRequest_Click;
             // 
             // btnManagerView
             // 
-            this.btnManagerView.BackColor = System.Drawing.Color.FromArgb(16, 124, 16);
-            this.btnManagerView.FlatAppearance.BorderSize = 0;
-            this.btnManagerView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnManagerView.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.btnManagerView.ForeColor = System.Drawing.Color.White;
-            this.btnManagerView.Location = new System.Drawing.Point(70, 170);
-            this.btnManagerView.Name = "btnManagerView";
-            this.btnManagerView.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnManagerView.Size = new System.Drawing.Size(260, 50);
-            this.btnManagerView.TabIndex = 2;
-            this.btnManagerView.Text = "مدیریت درخواست‌ها (مدیر)";
-            this.btnManagerView.UseVisualStyleBackColor = false;
-            this.btnManagerView.Click += new System.EventHandler(this.BtnManagerView_Click);
+            btnManagerView.BackColor = Color.FromArgb(16, 124, 16);
+            btnManagerView.FlatAppearance.BorderSize = 0;
+            btnManagerView.FlatStyle = FlatStyle.Flat;
+            btnManagerView.Font = new Font("Tahoma", 10F);
+            btnManagerView.ForeColor = Color.White;
+            btnManagerView.Location = new Point(70, 159);
+            btnManagerView.Name = "btnManagerView";
+            btnManagerView.RightToLeft = RightToLeft.Yes;
+            btnManagerView.Size = new Size(260, 47);
+            btnManagerView.TabIndex = 2;
+            btnManagerView.Text = "مدیریت درخواست‌ها (مدیر)";
+            btnManagerView.UseVisualStyleBackColor = false;
+            btnManagerView.Click += BtnManagerView_Click;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.Magenta;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Tahoma", 10F);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(70, 227);
+            button1.Name = "button1";
+            button1.RightToLeft = RightToLeft.Yes;
+            button1.Size = new Size(260, 47);
+            button1.TabIndex = 3;
+            button1.Text = "مدیریت رول (مدیر)";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 280);
-            this.Controls.Add(this.btnManagerView);
-            this.Controls.Add(this.btnEmployeeRequest);
-            this.Controls.Add(this.lblTitle);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "سیستم مدیریت مرخصی - Camunda 8";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(400, 318);
+            Controls.Add(button1);
+            Controls.Add(btnManagerView);
+            Controls.Add(btnEmployeeRequest);
+            Controls.Add(lblTitle);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "سیستم مدیریت مرخصی - Camunda 8";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -85,5 +103,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnEmployeeRequest;
         private System.Windows.Forms.Button btnManagerView;
+        private Button button1;
     }
 }
