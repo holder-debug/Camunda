@@ -15,10 +15,10 @@ public partial class RuleBuilderForm : Form
         lblActivationState.Checked = true;
         SetupDataGridView();
 
-        textBox1.Text += "input1.Day > 1 && input1.Day < 5";
-        textBox1.Text += Environment.NewLine;
-        textBox1.Text += Environment.NewLine;
-        textBox1.Text += "input1.Day > 6 && input1.Day < 10";
+        //textBox1.Text += "input1.Day > 1 && input1.Day < 5";
+        //textBox1.Text += Environment.NewLine;
+        //textBox1.Text += Environment.NewLine;
+        //textBox1.Text += "input1.Day > 6 && input1.Day < 10";
     }
 
     private void SetupDataGridView()
@@ -49,7 +49,34 @@ public partial class RuleBuilderForm : Form
         // بارگذاری قوانین موجود
         RefreshDataGridView();
     }
+    // لغو ویرایش
+ 
+    // حذف قانون
+    private void BtnDeleteRule_Click(object sender, EventArgs e)
+    {
+        if (_isEditing)
+        {
+            string ruleName = txtRuleName.Text.Trim();
+            var result = MessageBox.Show($"آیا از حذف قانون '{ruleName}' مطمئن هستید؟", "تأیید حذف",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
+            if (result == DialogResult.Yes)
+            {
+                Rules.RemoveAll(r => r.RuleName == ruleName);
+                SaveRulesToJson();
+                RefreshDataGridView();
+                CancelEditing();
+
+                MessageBox.Show($"قانون '{ruleName}' با موفقیت حذف شد.", "موفقیت",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        else
+        {
+            MessageBox.Show("لطفاً ابتدا یک قانون را انتخاب کنید.", "راهنما",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+    }
     private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
     {
         // اگر روی هدر یا خارج از ردیف کلیک شده باشد
