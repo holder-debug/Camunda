@@ -62,7 +62,7 @@ public partial class RuleBuilderForm : Form
 
             // گرفتن اطلاعات از ردیف
             string ruleName = row.Cells["RuleName"].Value?.ToString() ?? "";
-         
+
             string expression = row.Cells["Expression"].Value?.ToString() ?? "";
 
             var isEnabled = false;
@@ -97,7 +97,7 @@ public partial class RuleBuilderForm : Form
     }
 
 
- 
+
     private void BtnSaveJson_Click(object sender, EventArgs e)
     {
         try
@@ -285,5 +285,88 @@ public partial class RuleBuilderForm : Form
                 CancelEditing();
             }
         }
+    }
+
+    private void btnRuleCopy_Click(object sender, EventArgs e)
+    {
+        try
+        {
+         
+            if (Rules == null || Rules.Count == 0)
+            {
+                MessageBox.Show("هیچ قانونی برای کپی وجود ندارد.", "خطا",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+    
+            var workflow = new Workflow
+            {
+                WorkflowName = "MyWorkflow",
+                Rules = Rules
+            };
+
+            var workflows = new List<Workflow> { workflow };
+
+       
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping  
+            };
+
+            string jsonString = JsonSerializer.Serialize(workflows, options);
+
+          
+            Clipboard.SetText(jsonString);
+
+        
+
+            
+            ShowJsonInNewForm(jsonString);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"خطا در کپی JSON: {ex.Message}", "خطا",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+ 
+    private void ShowJsonInNewForm(string jsonString)
+    {
+        Form jsonForm = new Form();
+        jsonForm.Text = "مشاهده JSON قوانین";
+        jsonForm.Size = new Size(800, 600);
+        jsonForm.StartPosition = FormStartPosition.CenterParent;
+        jsonForm.RightToLeft = RightToLeft.Yes;
+
+        TextBox txtJson = new TextBox();
+        txtJson.Dock = DockStyle.Fill;
+        txtJson.Multiline = true;
+        txtJson.ScrollBars = ScrollBars.Both;
+        txtJson.WordWrap = false;
+        txtJson.Font = new Font("Consolas", 11);
+        txtJson.Text = jsonString;
+        txtJson.ReadOnly = true;
+
+        Button btnCopy = new Button();
+        btnCopy.Text = "کپی JSON";
+        btnCopy.Dock = DockStyle.Bottom;
+        btnCopy.Height = 40;
+        btnCopy.BackColor = Color.FromArgb(16, 124, 16);
+        btnCopy.ForeColor = Color.White;
+        btnCopy.FlatStyle = FlatStyle.Flat;
+        btnCopy.Click += (s, e2) =>
+        {
+            Clipboard.SetText(txtJson.Text);
+            MessageBox.Show("JSON در کلیپ‌بورد کپی شد!", "موفقیت",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        };
+
+        jsonForm.Controls.Add(txtJson);
+        jsonForm.Controls.Add(btnCopy);
+        jsonForm.ShowDialog();
     }
 }

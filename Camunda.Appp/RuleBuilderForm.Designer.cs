@@ -24,6 +24,7 @@ namespace Camunda.Appp
             btnSaveJson = new Button();
             dataGridView1 = new DataGridView();
             textBox1 = new TextBox();
+            btnRuleCopy = new Button();
             grpRuleInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -131,11 +132,27 @@ namespace Camunda.Appp
             textBox1.Size = new Size(409, 68);
             textBox1.TabIndex = 10;
             // 
+            // btnRuleCopy
+            // 
+            btnRuleCopy.BackColor = Color.Blue;
+            btnRuleCopy.FlatAppearance.BorderSize = 0;
+            btnRuleCopy.FlatStyle = FlatStyle.Flat;
+            btnRuleCopy.Font = new Font("Tahoma", 9F);
+            btnRuleCopy.ForeColor = Color.White;
+            btnRuleCopy.Location = new Point(280, 370);
+            btnRuleCopy.Name = "btnRuleCopy";
+            btnRuleCopy.Size = new Size(150, 35);
+            btnRuleCopy.TabIndex = 11;
+            btnRuleCopy.Text = "کپی قانون";
+            btnRuleCopy.UseVisualStyleBackColor = false;
+            btnRuleCopy.Click += btnRuleCopy_Click;
+            // 
             // RuleBuilderForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(529, 576);
+            Controls.Add(btnRuleCopy);
             Controls.Add(textBox1);
             Controls.Add(dataGridView1);
             Controls.Add(btnSaveJson);
@@ -167,5 +184,6 @@ namespace Camunda.Appp
         private CheckBox lblActivationState;
         private DataGridView dataGridView1;
         private TextBox textBox1;
+        private Button btnRuleCopy;
     }
 }
