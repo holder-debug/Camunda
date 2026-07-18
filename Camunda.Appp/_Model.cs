@@ -92,13 +92,56 @@ using System.Text.Json.Serialization;
         [JsonPropertyName("jobs")]
         public List<Job> Jobs { get; set; }
     }
- 
 
 
 
 
 
 
+    public class Activity
+    {
+        [JsonPropertyName("activityId")]
+        public string ActivityId { get; set; }
+
+        [JsonPropertyName("activityType")]
+        public string ActivityType { get; set; }
+
+        [JsonPropertyName("state")]
+        public string State { get; set; }
+
+        [JsonPropertyName("startDate")]
+        public DateTime? StartDate { get; set; }
+
+        [JsonPropertyName("endDate")]
+        public DateTime? EndDate { get; set; }
+
+        [JsonPropertyName("jobKey")]
+        public string JobKey { get; set; }
+
+        [JsonPropertyName("processInstanceKey")]
+        public string ProcessInstanceKey { get; set; }
+    }
+
+    public class ProcessDefinition
+    {
+        [JsonPropertyName("processDefinitionKey")]
+        public string ProcessDefinitionKey { get; set; }
+
+        [JsonPropertyName("processDefinitionId")]
+        public string ProcessDefinitionId { get; set; }
+
+        [JsonPropertyName("processDefinitionName")]
+        public string ProcessDefinitionName { get; set; }
+
+        [JsonPropertyName("version")]
+        public int Version { get; set; }
+
+        [JsonPropertyName("resourceName")]
+        public string ResourceName { get; set; }
+
+        [JsonPropertyName("tenantId")]
+        public string TenantId { get; set; }
+    }
 
 
 

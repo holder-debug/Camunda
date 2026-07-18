@@ -15,10 +15,8 @@ public partial class RuleBuilderForm : Form
         lblActivationState.Checked = true;
         SetupDataGridView();
 
-        //textBox1.Text += "input1.Day > 1 && input1.Day < 5";
-        //textBox1.Text += Environment.NewLine;
-        //textBox1.Text += Environment.NewLine;
-        //textBox1.Text += "input1.Day > 6 && input1.Day < 10";
+        //   input1.Day >= 1 && input1.Day <= 5
+        //   input1.Day >= 6 && input1.Day <= 10
     }
 
     private void SetupDataGridView()
