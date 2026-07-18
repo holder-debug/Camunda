@@ -2,7 +2,9 @@ using Camunda.Appp;
 
 namespace Camunda.Appp
 {
- 
+
+    //   input1.Day >= 1 && input1.Day <= 5
+    //   input1.Day >= 6 && input1.Day <= 10
     internal static class Program
     {
         /// <summary>
